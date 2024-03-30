@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+<html>
+<head>
+  <body style="background-color:  #66ffff ;">
+
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">App Name </th>
+        <th scope="col">Summary </th>
+        <th scope="col">Threat Score</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in result %}
+        <tr>
+            <td>{{user[0]}} </td>
+            <td>{{user[1]}} </td>
+            
+            <td>{{user[2]}} </td>
+            
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          {searchable: false},
+          {searchable: false},
+          {orderable: false, searchable: false}],
+      });
+    });
+  </script>
+{% endblock %}
